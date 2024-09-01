@@ -1,76 +1,34 @@
 <!DOCTYPE html>
+<html ng-app="customersApp">
+  <head>
+    <title>Iterating Over Data</title>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body ng-controller="CustomersController">
+    <h2>Customers</h2>
+    Filter: <input type="text" ng-model="customerFilter.name" /> <br /><br />
+    <table>
+      <tr>
+        <th ng-click="doSort('name')">Name</th>
+        <th ng-click="doSort('city')">City</th>
+        <th ng-click="doSort('orderTotal')">Order Total</th>
+        <th ng-click="doSort('joined')">Joined</th>
+      </tr>
+      <tr
+        ng-repeat="cust in customers | filter:customerFilter | orderBy:sortBy:reverse"
+      >
+        <td>{{ cust.name }}</td>
+        <td>{{ cust.city }}</td>
+        <td>{{ cust.orderTotal | currency }}</td>
+        <td>{{ cust.joined | date }}</td>
+      </tr>
+    </table>
+    <br />
+    <span>Total customers: {{ customers.length }}</span>
 
-<html ng-app>
-    <head>
-        <title>HelloWordAngularJs</title>
-    </head>
-    <body ng-init="name='Jame'">
-        <div ng-cloak>
-                <div ng-hide="isHidden">
-                    First Name: <input type="text" ng-model="name"/>
-                    {{name}}
-                    <span ng-bind="name"></span>
-                </div>
-                <br />
-                Hide: <input type="checkbox" ng-model="isHidden" />
-                <br />
-                <button ng-click="name='Maical'">Click</button>
-        </div>
-        <div ng-init="names=['Dave', 'Jeff', 'Defy']">
-            <ul>
-                <li ng-repeat="name in names">{{name}}</li>
-            </ul>
-        </div>
-        <br />
-        <div ng-init="people=[{name: 'Dave', city: 'Barlin'}, {name: 'Jeff', city: 'London'}, {name: 'Defy', city: 'Singapore'}]">
-            <table>
-                <tr>
-                    <td>Name</td>
-                    <td>City</td>
-                </tr>
-                <tr ng-repeat="person in people">
-                    <td>{{person.name}}</td>
-                    <td>{{person.city}}</td>
-                </tr>
-            </table>
-        </div>
-        <br />
-        <h4>Pipe | Filter Example</h4>
-        Filter By All: <input type="text" ng-model="filterValue" />
-        Filter By Name: <input type="text" ng-model="filterName.name" />
-        <div ng-init="customers=[{joinedDate: '2000-12-12', name: 'John', city: 'New York', orderTotal: 234.443}, {joinedDate: '2023-01-30', name: 'Jin', city: 'Amsterdam', orderTotal: 99.989}]">
-            <table>
-                <tr>
-                    <td>Name</td>
-                    <td>City</td>
-                    <td>Order Total</td>
-                    <td>Joined Date</td>
-                </tr>
-                <tr ng-repeat="cus in customers | filter: filterValue | filter: filterName | orderBy: 'name'">
-                    <td>{{cus.name}}</td>
-                    <td>{{cus.city}}</td>
-                    <td>{{cus.orderTotal | currency}}</td>
-                    <td>{{cus.joinedDate | date}}</td>
-                </tr>
-            </table>
-        </div>
-        <h4>Sort Example</h4>
-        <div ng-init="customers2=[{joinedDate: '2012-06-21', name: 'Dan', city: 'Chicago', orderTotal: 34.1256}, {joinedDate: '2000-12-12', name: 'John', city: 'New York', orderTotal: 234.443}, {joinedDate: '2023-01-30', name: 'Jin', city: 'Amsterdam', orderTotal: 99.989}]">
-            <table>
-                <tr>
-                    <td ng-click="sortByValue='name'; reverseValue=!reverseValue">Name</td>
-                    <td ng-click="sortByValue='city'; reverseValue=!reverseValue">City</td>
-                    <td ng-click="sortByValue='orderTotal'; reverseValue=!reverseValue">Order Total</td>
-                    <td ng-click="sortByValue='joinedDate'; reverseValue=!reverseValue">Joined Date</td>
-                </tr>
-                <tr ng-repeat="cus in customers2 | orderBy:sortByValue:reverseValue">
-                    <td>{{cus.name}}</td>
-                    <td>{{cus.city}}</td>
-                    <td>{{cus.orderTotal | currency}}</td>
-                    <td>{{cus.joinedDate | date}}</td>
-                </tr>
-            </table>
-        </div>
-        <script src="angular.js" />
-    </body>
+    <script src="angular.js"></script>
+    <script src="angular-route.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controllers/customersController.js"></script>
+  </body>
 </html>
