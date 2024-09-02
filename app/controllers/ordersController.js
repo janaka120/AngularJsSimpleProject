@@ -12,7 +12,9 @@
         .success(function (customer) {
           $scope.customer = customer;
         })
-        .error(function (data, status, headers, config) {});
+        .error(function (data, status, headers, config) {
+            $log.log(data.error + ' ' + status);
+        });
     }
 
     init();
