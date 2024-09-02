@@ -39,18 +39,23 @@
     $scope.appSettings = appSettings;
 
     function init() {
-      $scope.customers = customersFactory.getCustomers();
+      customersFactory
+        .getCustomers()
+        .success(function (customers) {
+          $scope.customers = customers;
+        })
+        .error(function (data, status, headers, config) {});
     }
 
     init();
-    
+
     $scope.doSort = function (propName) {
       $scope.sortBy = propName;
       $scope.reverse = !$scope.reverse;
     };
   };
 
-  CustomersController.$inject = ["$scope", 'customersFactory','appSettings'];
+  CustomersController.$inject = ["$scope", "customersFactory", "appSettings"];
 
   angular
     .module("customersApp")
