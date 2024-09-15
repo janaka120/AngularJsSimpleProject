@@ -71,10 +71,15 @@
     function getCustomerById(cusId) {
       return $http.get('http://localhost:5500/customers/' + cusId);
     }
+    
+    function deleteCustomerById(cusId) {
+      return $http.delete('http://localhost:5500/customers/' + cusId);
+    }
 
     var factory = {
       getCustomers: getsCustomer,
       getCustomer: getCustomerById,
+      deleteCustomer: deleteCustomerById,
     };
     return factory;
   };

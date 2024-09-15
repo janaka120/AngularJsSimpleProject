@@ -55,6 +55,33 @@
       $scope.sortBy = propName;
       $scope.reverse = !$scope.reverse;
     };
+
+    // $scope.deleteCustomer = function(cusId) {
+    //   customersFactory
+    //   .deleteCustomer(cusId)
+    //   .success(function(res) {
+    //     if(res.status) {
+    //       const customersList = $scope.customers;
+    //       for (var i = 0, len =  $scope.customers.length; i < len; i++) {
+    //         if ($scope.customers[i].id === cusId) {
+    //           customersList.splice(i, 1);
+    //           break;
+    //         }
+    //       }
+    //       $scope.customers = customersList;
+    //     }
+    //   })
+    // }
+    $scope.deleteCustomer = function(cusId) {
+      customersFactory
+      .deleteCustomer(cusId)
+      .success(function(res) {
+        console.log("res >>", res);
+        if(res.status) {
+          init();
+        }
+      })
+    }
   };
 
   CustomersController.$inject = ["$scope", "$log", "customersFactory", "appSettings"];

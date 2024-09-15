@@ -1,6 +1,6 @@
 (function() {
     
-    var app = angular.module('customersApp', ['ngRoute']);
+    var app = angular.module('customersApp', ['ngRoute', 'ngAnimate']);
 
     app.config(function($routeProvider) {
         $routeProvider
@@ -11,6 +11,10 @@
             .when('/orders/:customerId', {
                 controller: 'OrdersController',
                 templateUrl: 'app/views/orders.html'
+            })
+            .when('/orders', {
+                controller: 'OrderListController',
+                templateUrl: 'app/views/orderList.html'
             })
             .otherwise({redirectTo: '/'})
     })
